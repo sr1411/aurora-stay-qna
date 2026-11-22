@@ -12,7 +12,10 @@ COPY . .
 RUN pip install --no-cache-dir --upgrade pip
 
 # Install Python dependencies listed in requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir \
+    --default-timeout=300 \
+    --retries 10 \
+    -r requirements.txt
 
 # Run the Streamlit application on port 8501
 # 0.0.0.0 makes the application accessible outside the container
